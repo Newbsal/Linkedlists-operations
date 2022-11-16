@@ -53,7 +53,7 @@ void deletelematbeg(Node** head){
 }
 //deletes a node at the end;
 void deletelematend(Node** head){
-    printf("le dernier element de la liste va etre supprime!\n");
+
     if((*head)==NULL) {
         printf("Cette liste est deja vide!");
         return;
@@ -63,11 +63,11 @@ void deletelematend(Node** head){
     Node *fr=tmp->link;
     free(fr);
     tmp->link=NULL;
-    printf("element supprime!\n");
+
 }
 //gives the sum of the elements of a linked list;
 void sum(Node** head) {
-    int sum;
+    int sum=0;
     Node *tmp = (*head);
     while (tmp != NULL) {
         sum = sum + tmp->data;
@@ -126,6 +126,43 @@ void tri(Node** head){
             }
         }
     }
+//creates another linked list with inversed elements;
+void New_inverse(Node** head, Node** newhead){
+    Node* tmp=(*head);
+        while (tmp != NULL) {
+            Addbeg(newhead, tmp->data);
+            tmp = tmp->link;
+        }
+    }
+//inverses the elements of the current linked list using other functions;
+void imed_inverse(Node** head) {
+    if ((*head) == NULL) {
+        printf("Cette liste est vide!");
+        return;
+    }
+    int pos =0;
+    Node *tmp = (*head);
+    while (tmp != NULL) {
+        Addbeg(head,tmp->data);
+        tmp = tmp->link;
+        pos++;
+    }
+    for(int i=0;i<pos;i++){
+        deletelematend(head);
+    }
+}
+//inverse the elements of the current linked list using pointers;
+void imed_inverstandard(Node** head){
+    Node *current = (*head);
+    Node *prev = NULL, *next = NULL;
+    while (current != NULL) {
+        next = current->link;
+        current->link = prev;
+        prev = current;
+        current = next;
+    }
+    (*head) = prev;
+}
 
 
 
